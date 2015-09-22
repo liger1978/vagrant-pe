@@ -1,0 +1,5 @@
+---
+boxes:
+  'centos6': 'https://atlas.hashicorp.com/puppetlabs/boxes/centos-6.6-64-nocm/versions/1.0.2/providers/virtualbox.box'
+  'centos7': 'https://atlas.hashicorp.com/puppetlabs/boxes/centos-7.0-64-nocm/versions/1.0.2/providers/virtualbox.box'
+

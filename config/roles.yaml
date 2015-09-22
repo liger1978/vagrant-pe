@@ -1,0 +1,50 @@
+---
+roles:
+  pe-puppet-master:
+    private_networks:
+      - {ip: '0.0.0.0', auto_network: true}
+    provider:
+      type: virtualbox
+      customize:
+        - [modifyvm, !ruby/sym id, '--memory', 2048]
+    provisioners:
+      - type: hosts
+      - type: shell
+        inline: |
+            firewall-cmd --permanent --zone=public --add-service=https
+            firewall-cmd --permanent --zone=public --add-port=8140/tcp
+            firewall-cmd --permanent --zone=public --add-port=61613/tcp
+            firewall-cmd --reload
+      - type: pe_bootstrap
+        role: !ruby/sym master
+  pe-puppet-agent:
+    private_networks:
+      - {ip: '0.0.0.0', auto_network: true}
+    provisioners:
+      - {type: hosts}
+      - {type: pe_bootstrap}
+  gitlab-server:
+    private_networks:
+      - {ip: '0.0.0.0', auto_network: true}
+    provider:
+      type: virtualbox
+      customize:
+        - [modifyvm, !ruby/sym id, '--memory', 1024]
+    provisioners:
+      - {type: hosts}
+      - {type: pe_bootstrap}
+      - type: shell
+        inline: |
+            firewall-cmd --permanent --zone=public --add-service=http
+            firewall-cmd --permanent --zone=public --add-service=https
+            firewall-cmd --reload
+            yum -y install curl postfix
+            systemctl enable postfix
+            systemctl start postfix
+            curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh | bash
+            yum -y install gitlab-ce
+            gitlab-ctl reconfigure
+            
+            
+            
+            
