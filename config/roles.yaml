@@ -15,7 +15,15 @@ roles:
             firewall-cmd --permanent --zone=public --add-port=8140/tcp
             firewall-cmd --permanent --zone=public --add-port=61613/tcp
             firewall-cmd --reload
+            mkdir -p /root/.ssh
+            cp -f /vagrant/ssh-keys/* /root/.ssh
+            chmod 0600 /root/.ssh/id_rsa
+            rm -f /etc/ssl/certs/ca-bundle.crt
+            yum -y install ca-certificates
       - type: pe_bootstrap
+        answer_extras:
+          - 'q_puppetmaster_r10k_remote=git@gitlab:puppet/control.git'
+          - 'q_puppetmaster_r10k_private_key=/root/.ssh/id_rsa'
         role: !ruby/sym master
   pe-puppet-agent:
     private_networks:
@@ -38,13 +46,16 @@ roles:
             firewall-cmd --permanent --zone=public --add-service=http
             firewall-cmd --permanent --zone=public --add-service=https
             firewall-cmd --reload
-            yum -y install curl postfix
+            yum -y install curl postfix expect
             systemctl enable postfix
             systemctl start postfix
             curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh | bash
             yum -y install gitlab-ce
             gitlab-ctl reconfigure
-            
-            
-            
-            
+            gitlab-ctl stop unicorn
+            gitlab-ctl stop sidekiq
+            mkdir /var/opt/gitlab/backups
+            cp -f /vagrant/gitlab-backup/1443019859_gitlab_backup.tar /var/opt/gitlab/backups/
+            chown -R git:root /var/opt/gitlab/backups/
+            expect -c "spawn /bin/gitlab-rake gitlab:backup:restore BACKUP=1443019859; sleep 5; expect -re \"Do you want to continue (yes/no)?\"; send \"yes\r\n\"; set timeout -1; expect -re \"done\";"
+            gitlab-ctl start
