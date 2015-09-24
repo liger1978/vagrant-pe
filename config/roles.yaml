@@ -55,7 +55,7 @@ roles:
             gitlab-ctl stop unicorn
             gitlab-ctl stop sidekiq
             mkdir /var/opt/gitlab/backups
-            cp -f /vagrant/gitlab-backup/1443086444_gitlab_backup.tar /var/opt/gitlab/backups/
+            cp -f /vagrant/gitlab-backup/1443091623_gitlab_backup.tar /var/opt/gitlab/backups/
             chown -R git:root /var/opt/gitlab/backups/
-            expect -c "spawn /bin/gitlab-rake gitlab:backup:restore BACKUP=1443086444; sleep 5; expect -re \"Do you want to continue (yes/no)?\"; send \"yes\r\n\"; set timeout -1; expect -re \"done\";"
+            expect -c "spawn /bin/gitlab-rake gitlab:backup:restore BACKUP=1443091623; sleep 5; expect -re \"Do you want to continue (yes/no)?\"; send \"yes\r\n\"; set timeout -1; expect -re \"done\";"
             gitlab-ctl start
