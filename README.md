@@ -1,5 +1,5 @@
 # vagrant-pe
-Vagrant dev environment for Puppet Enterprise 2015 with R10K and GitLab
+Vagrant dev environment for Puppet Enterprise 2015 with R10K and GitLab.
 
 ## Usage
 First install [Vagrant](https://www.vagrantup.com/downloads.html). 
@@ -35,10 +35,10 @@ exit
 All boxes are currently CentOS 7 and use the generic base boxes created by
 PuppetLabs.
 
-`gitlab`: This is a GitLab server that holds the ``puppet/contol`` repo that
+`gitlab`: This is a GitLab server that holds the ``puppet/control`` repo that
 is used by [R10K to populate the Puppet environments](https://docs.puppetlabs.com/pe/latest/quick_start_r10k.html)
 on the `master` Puppet Enterprise server. It also has a ``puppet/helloworld``
-repo, that contains an example module referenced in the ``site.pp`` manifest.
+repo that contains an example module referenced in the ``site.pp`` manifest.
 
 If you have the ``vagrant-hostmanager`` plugin installed, you can access the
 GitLab web interface from your host's web browser at [http://gitlab](http://gitlab).
@@ -49,7 +49,12 @@ This box also has the puppet agent installed.
 down Puppet code from the repos on `gitlab`.
 
 If you have the ``vagrant-hostmanager`` plugin installed, you can access the
-PE console from your host's web browser at [https://master](https://master).
+PE console from your host's web browser at [https://master](https://master),
+using the following default login credentials:
 
-`first`: This is a server with the PE agent installed.
+| **Username** | `Admin`      |
+|--------------|--------------|
+| **Password** | `puppetlabs` |
+
+`first`: This is a basic server with the PE agent installed.
 
