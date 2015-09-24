@@ -41,7 +41,12 @@ on the `master` Puppet Enterprise server. It also has a ``puppet/helloworld``
 repo that contains an example module referenced in the ``site.pp`` manifest.
 
 If you have the ``vagrant-hostmanager`` plugin installed, you can access the
-GitLab web interface from your host's web browser at [http://gitlab](http://gitlab).
+GitLab web interface from your host's web browser at [http://gitlab](http://gitlab),
+using the following default login credentials:
+
+| **Username** | **Password** |
+|--------------|--------------|
+| `root`       | `5iveL!fe`   |
 
 This box also has the puppet agent installed.
 
@@ -52,9 +57,9 @@ If you have the ``vagrant-hostmanager`` plugin installed, you can access the
 PE console from your host's web browser at [https://master](https://master),
 using the following default login credentials:
 
-| **Username** | `Admin`      |
+| **Username** | **Password** |
 |--------------|--------------|
-| **Password** | `puppetlabs` |
+| `Admin`      | `puppetlabs` |
 
 `first`: This is a basic server with the PE agent installed.
 
