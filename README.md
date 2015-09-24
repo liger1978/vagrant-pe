@@ -65,4 +65,5 @@ using the following default login credentials:
 |--------------|--------------|
 | `Admin`      | `puppetlabs` |
 
-`first`: This is a basic CentOS machine with the PE agent installed.
+### first
+The `first` machine is a basic CentOS machine with the PE agent installed.
