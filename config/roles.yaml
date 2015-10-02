@@ -46,16 +46,37 @@ roles:
             firewall-cmd --permanent --zone=public --add-service=http
             firewall-cmd --permanent --zone=public --add-service=https
             firewall-cmd --reload
-            yum -y install curl postfix expect
+            yum -y install curl postfix expect rubygems git gcc mysql-devel ruby-devel
             systemctl enable postfix
             systemctl start postfix
             curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh | bash
-            yum -y install gitlab-ce-8.0.1
+            yum -y install gitlab-ce
             gitlab-ctl reconfigure
-            gitlab-ctl stop unicorn
-            gitlab-ctl stop sidekiq
-            mkdir /var/opt/gitlab/backups
-            cp -f /vagrant/gitlab-backup/1443091623_gitlab_backup.tar /var/opt/gitlab/backups/
-            chown -R git:root /var/opt/gitlab/backups/
-            expect -c "spawn /bin/gitlab-rake gitlab:backup:restore BACKUP=1443091623; sleep 5; expect -re \"Do you want to continue (yes/no)?\"; send \"yes\r\n\"; set timeout -1; expect -re \"done\";"
-            gitlab-ctl start
+            gem install gitlab
+            gitlab-rails r -e production /vagrant/scripts/set-gitlab-password.rb
+            export GITLAB_API_ENDPOINT=http://gitlab/api/v3
+            export GITLAB_API_PRIVATE_TOKEN="$(gitlab-rails r -e production /vagrant/scripts/get-gitlab-token.rb)"
+            export PUB_KEY="$(cat /vagrant/ssh-keys/id_rsa.pub)"
+            gitlab create_ssh_key 'root@master' "$PUB_KEY"
+            gitlab create_group 'puppet' 'puppet'
+            export GITLAB_NAMESPACE_ID=$(gitlab groups | grep puppet | sed 's/[^0-9]//g')
+            gitlab create_project "control" "{namespace_id: '$GITLAB_NAMESPACE_ID'}"
+            gitlab create_project "helloworld" "{namespace_id: '$GITLAB_NAMESPACE_ID'}"
+            git config --global user.name "root"
+            git config --global user.email "root@master"
+            mkdir -p /root/.ssh
+            ssh-keyscan gitlab >> ~/.ssh/known_hosts
+            cp -f /vagrant/ssh-keys/* /root/.ssh
+            chmod 0600 /root/.ssh/id_rsa
+            cd /vagrant/git/control
+            git push -u origin production
+            cd /vagrant/git/helloworld
+            git push -u origin master
+            
+            
+            
+            
+            
+            
+            
+            
