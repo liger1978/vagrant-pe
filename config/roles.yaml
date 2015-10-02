@@ -50,7 +50,7 @@ roles:
             systemctl enable postfix
             systemctl start postfix
             curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh | bash
-            yum -y install gitlab-ce
+            yum -y install gitlab-ce-8.0.1
             gitlab-ctl reconfigure
             gitlab-ctl stop unicorn
             gitlab-ctl stop sidekiq
