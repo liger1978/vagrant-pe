@@ -46,7 +46,7 @@ roles:
             firewall-cmd --permanent --zone=public --add-service=http
             firewall-cmd --permanent --zone=public --add-service=https
             firewall-cmd --reload
-            yum -y install curl postfix expect rubygems git gcc mysql-devel ruby-devel
+            yum -y install curl postfix rubygems git gcc mysql-devel ruby-devel
             systemctl enable postfix
             systemctl start postfix
             curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh | bash
