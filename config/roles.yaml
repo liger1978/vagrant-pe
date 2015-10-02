@@ -68,9 +68,11 @@ roles:
             ssh-keyscan gitlab >> ~/.ssh/known_hosts
             cp -f /vagrant/ssh-keys/* /root/.ssh
             chmod 0600 /root/.ssh/id_rsa
-            cd /vagrant/git/control
+            tar xf /vagrant/git/control.tar
+            tar xf /vagrant/git/helloworld.tar
+            cd /root/control
             git push -u origin production
-            cd /vagrant/git/helloworld
+            cd /root/helloworld
             git push -u origin master
             
             
