@@ -4,7 +4,8 @@ R10K and GitLab.
 
 ## Usage
 First install [VirtualBox](https://www.virtualbox.org/) and
-[Vagrant](https://www.vagrantup.com/downloads.html). 
+[Vagrant](https://www.vagrantup.com/downloads.html) and then run the following
+commands:
 
 ````bash
 # Install required oscar plugin:
