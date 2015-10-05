@@ -3,7 +3,8 @@ A multi-machine Vagrant development environment for Puppet Enterprise 2015 with
 R10K and GitLab.
 
 ## Usage
-First install [Vagrant](https://www.vagrantup.com/downloads.html). 
+First install [VirtualBox](https://www.virtualbox.org/) and
+[Vagrant](https://www.vagrantup.com/downloads.html). 
 
 ````bash
 # Install required oscar plugin:
