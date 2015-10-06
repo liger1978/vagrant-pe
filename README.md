@@ -82,3 +82,30 @@ default administrator passwords.  The Puppet server has been configured with a
 default SSH private key that is accessible in this repository. Please change all
 security tokens and conduct security hardening if you plan to use this
 environment for anything other than testing and development on your own machine.
+
+## Known issues
+
+[Windows permission denied issue](https://github.com/liger1978/vagrant-pe/issues/4)
+
+When using the above on Microsoft Windows, you may get and get an error when you run `vagrant up`, e.g.:
+
+```
+==> first: Running provisioner: pe_bootstrap...
+Fetching: https://s3.amazonaws.com/pe-builds/released/2015.2.0/puppet-enterprise-2015.2.0-el-7-x86_64.tar.gz
+An error occurred while trying to download the given resource (https://s3.amazonaws.com/pe-builds/released/2015.2.0/puppet-enterprise-2015.2.0-el-7-x86_64.tar.gz),
+and the transfer could not complete.
+The error message generated was
+"Permission denied - (C:/Users/harbottle/AppData/Local/Temp/open-uri20150909-8432-11s1yru, C:/Users/harbottle/.vagrant.d/pe_builds/puppet-enterprise-2015.2.0-el-7-x86_64.tar.gz)".
+```
+This is caused by an open issue with
+[oscar-stack/vagrant-pe_build](https://github.com/oscar-stack/vagrant-pe_build).
+The [issue log](https://github.com/oscar-stack/vagrant-pe_build/issues/60)
+describes the cause of the issue and the workaround. 
+
+The workaround is to manually copy the PE installer, e.g.:
+https://s3.amazonaws.com/pe-builds/released/2015.2.0/puppet-enterprise-2015.2.0-el-7-x86_64.tar.gz
+to `VAGRANT_HOME/pe_builds`.
+
+
+
+
