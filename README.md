@@ -72,3 +72,13 @@ using the following default login credentials:
 
 ### first
 The `first` machine is a basic CentOS machine with the PE agent installed.
+
+## A note on security
+
+This Vagrant environment is suitable for testing and development on your own
+computer.  The virtual machines are accessible from the host, but not from your
+network (by default). The Puppet server and GitLab have been configured with
+default administrator passwords.  The Puppet server has been configured with a
+default SSH private key that is accessible in this repository. Please change all
+security tokens and conduct security hardening if you plan to use this
+environment for anything other than testing and development on your own machine.
