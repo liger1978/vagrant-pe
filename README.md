@@ -105,7 +105,3 @@ describes the cause of the issue and the workaround.
 The workaround is to manually copy the PE installer, e.g.:
 https://s3.amazonaws.com/pe-builds/released/2015.2.0/puppet-enterprise-2015.2.0-el-7-x86_64.tar.gz
 to `VAGRANT_HOME/pe_builds`.
-
-
-
-
