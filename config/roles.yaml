@@ -3,10 +3,10 @@ roles:
   pe-puppet-master:
     private_networks:
       - {ip: '0.0.0.0', auto_network: true}
-    provider:
-      type: virtualbox
-      customize:
-        - [modifyvm, !ruby/sym id, '--memory', 2048]
+    providers:
+      - type: virtualbox
+        customize:
+          - [modifyvm, !ruby/sym id, '--memory', 2048]
     provisioners:
       - type: hosts
       - type: shell
@@ -34,10 +34,10 @@ roles:
   gitlab-server:
     private_networks:
       - {ip: '0.0.0.0', auto_network: true}
-    provider:
-      type: virtualbox
-      customize:
-        - [modifyvm, !ruby/sym id, '--memory', 1024]
+    providers:
+      - type: virtualbox
+        customize:
+          - [modifyvm, !ruby/sym id, '--memory', 1024]
     provisioners:
       - {type: hosts}
       - {type: pe_bootstrap}
@@ -74,11 +74,3 @@ roles:
             git push -u origin production
             cd /tmp/helloworld
             git push -u origin master
-            
-            
-            
-            
-            
-            
-            
-            
