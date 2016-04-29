@@ -6,7 +6,7 @@ roles:
     providers:
       - type: virtualbox
         customize:
-          - [modifyvm, !ruby/sym id, '--memory', 2048]
+          - [modifyvm, !ruby/sym id, '--memory', 4096]
     provisioners:
       - type: hosts
       - type: shell
