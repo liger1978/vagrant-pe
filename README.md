@@ -1,5 +1,5 @@
 # vagrant-pe
-A multi-machine Vagrant development environment for Puppet Enterprise 2015 with
+A multi-machine Vagrant development environment for Puppet Enterprise 2016 with
 R10K and GitLab.
 
 ## Usage
@@ -13,7 +13,7 @@ vagrant plugin install oscar
 
 # Install recommended plugins:
 vagrant plugin install vagrant-cachier vagrant-hostmanager
- 
+
 # Clone repo:
 git clone https://github.com/liger1978/vagrant-pe.git
 
@@ -91,17 +91,17 @@ When using the above on Microsoft Windows, you may get and get an error when you
 
 ```
 ==> first: Running provisioner: pe_bootstrap...
-Fetching: https://s3.amazonaws.com/pe-builds/released/2015.2.0/puppet-enterprise-2015.2.0-el-7-x86_64.tar.gz
-An error occurred while trying to download the given resource (https://s3.amazonaws.com/pe-builds/released/2015.2.0/puppet-enterprise-2015.2.0-el-7-x86_64.tar.gz),
+Fetching: https://s3.amazonaws.com/pe-builds/released/2016.1.1/puppet-enterprise-2016.1.1-el-7-x86_64.tar.gz
+An error occurred while trying to download the given resource (https://s3.amazonaws.com/pe-builds/released/2016.1.1/puppet-enterprise-2016.1.1-el-7-x86_64.tar.gz),
 and the transfer could not complete.
 The error message generated was
-"Permission denied - (C:/Users/harbottle/AppData/Local/Temp/open-uri20150909-8432-11s1yru, C:/Users/harbottle/.vagrant.d/pe_builds/puppet-enterprise-2015.2.0-el-7-x86_64.tar.gz)".
+"Permission denied - (C:/Users/harbottle/AppData/Local/Temp/open-uri20150909-8432-11s1yru, C:/Users/harbottle/.vagrant.d/pe_builds/puppet-enterprise-2016.1.1-el-7-x86_64.tar.gz)".
 ```
 This is caused by an open issue with
 [oscar-stack/vagrant-pe_build](https://github.com/oscar-stack/vagrant-pe_build).
 The [issue log](https://github.com/oscar-stack/vagrant-pe_build/issues/60)
-describes the cause of the issue and the workaround. 
+describes the cause of the issue and the workaround.
 
 The workaround is to manually copy the PE installer, e.g.:
-https://s3.amazonaws.com/pe-builds/released/2015.2.0/puppet-enterprise-2015.2.0-el-7-x86_64.tar.gz
+https://s3.amazonaws.com/pe-builds/released/2016.1.1/puppet-enterprise-2016.1.1-el-7-x86_64.tar.gz
 to `VAGRANT_HOME/pe_builds`.

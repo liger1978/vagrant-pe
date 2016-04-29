@@ -3,10 +3,10 @@ roles:
   pe-puppet-master:
     private_networks:
       - {ip: '0.0.0.0', auto_network: true}
-    provider:
-      type: virtualbox
-      customize:
-        - [modifyvm, !ruby/sym id, '--memory', 2048]
+    providers:
+      - type: virtualbox
+        customize:
+          - [modifyvm, !ruby/sym id, '--memory', 2048]
     provisioners:
       - type: hosts
       - type: shell
@@ -34,10 +34,10 @@ roles:
   gitlab-server:
     private_networks:
       - {ip: '0.0.0.0', auto_network: true}
-    provider:
-      type: virtualbox
-      customize:
-        - [modifyvm, !ruby/sym id, '--memory', 1024]
+    providers:
+      - type: virtualbox
+        customize:
+          - [modifyvm, !ruby/sym id, '--memory', 1024]
     provisioners:
       - {type: hosts}
       - {type: pe_bootstrap}
@@ -59,7 +59,7 @@ roles:
             export PUB_KEY="$(cat /vagrant/ssh-keys/id_rsa.pub)"
             gitlab create_ssh_key 'root@master' "$PUB_KEY"
             gitlab create_group 'puppet' 'puppet'
-            export GITLAB_NAMESPACE_ID=$(gitlab groups | grep puppet | sed 's/[^0-9]//g')
+            export GITLAB_NAMESPACE_ID=$(gitlab groups | grep puppet | awk '{ print $5 }')
             gitlab create_project "control" "{namespace_id: '$GITLAB_NAMESPACE_ID'}"
             gitlab create_project "helloworld" "{namespace_id: '$GITLAB_NAMESPACE_ID'}"
             git config --global user.name "root"
@@ -74,11 +74,3 @@ roles:
             git push -u origin production
             cd /tmp/helloworld
             git push -u origin master
-            
-            
-            
-            
-            
-            
-            
-            

@@ -1,14 +1,14 @@
 ---
 vms:
-- name: master
-  box: centos7
-  roles:
-  - pe-puppet-master
-- name: gitlab
-  box: centos7
-  roles:
-  - gitlab-server
-- name: first
-  box: centos7
-  roles:
-  - pe-puppet-agent
+  - name: master
+    box: centos7
+    roles:
+      - pe-puppet-master
+  - name: gitlab
+    box: centos7
+    roles:
+      - gitlab-server
+  - name: first
+    box: centos7
+    roles:
+      - pe-puppet-agent
